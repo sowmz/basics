@@ -1,0 +1,99 @@
+Hi
+
+
+public class SimpleTree {
+
+    TreeNode root;
+
+    public void addNode(int value){
+
+        TreeNode node = new TreeNode(value);
+
+        if (root == null){
+            root = node;
+            return;}
+        else {
+            TreeNode current = root;
+            TreeNode previous = null;
+
+            while(current != null){
+                if (value > current.value)
+                {
+                    previous = current;
+                    current = current.rightChild;
+                }
+                else {
+                    previous = current;
+                    current = current .leftChild;
+                }}
+            if (value > previous.value){
+                previous.rightChild = node;
+            }
+            else {previous.leftChild = node;}
+        }
+
+
+    }
+    public static void main(String[] args) {
+        SimpleTree tree = new SimpleTree();
+          tree.addNode(5);
+          tree.addNode(6);
+          tree.addNode(4);
+          tree.addNode(2);
+          tree.addNode(9);
+          tree.addNode(3);
+          tree.addNode(0);
+
+          tree.displayBFS();
+          tree.displayDFS();
+
+    }
+
+    public void displayBFS(){
+        if (root == null){
+            return;
+        }
+        else {
+            Queue<TreeNode> myQueue = new LinkedList<>();
+            TreeNode current = root;
+            myQueue.add(current);
+
+            while (myQueue.size()>0){
+
+                current = myQueue.remove();
+
+                if (current.leftChild != null){
+                    myQueue.add(current.leftChild);
+
+                }
+                if (current.rightChild != null){
+                    myQueue.add(current.rightChild);
+                }
+                System.out.print(current.value+ "--");
+            }
+
+        }
+    }
+
+
+    public void displayDFS() {
+        if (root == null) {
+            return;
+        } else {
+            Stack<TreeNode> myStack = new Stack<>();
+            TreeNode current = root;
+            myStack.push(current);
+            while (myStack.size()>0){
+                current = myStack.pop();
+                if (current.leftChild != null){
+                    myStack.push(current.leftChild);
+                }
+                if (current.rightChild != null){
+                    myStack.push(current.rightChild);
+                }
+                System.out.print(current.value);
+            }
+        }
+    }
+}
+
